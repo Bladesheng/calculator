@@ -114,6 +114,7 @@ operatorsBtns.forEach((button) => {
       // slices off the end of current number
       currNumber = currNumber.substring(0, currNumber.length - 1);
       writeCurrent(currNumber);
+      console.log("C");
       console.log(currNumber);
       return;
     }
