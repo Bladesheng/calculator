@@ -64,18 +64,27 @@ numberBtns.forEach((button) => {
 const operatorsBtns = document.querySelectorAll(".operatorBtn")
 operatorsBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
-    // "clear" button
-    if (event.target.id === "clear") {
+    // "clear eveything" button
+    if (event.target.id === "CE") {
       currentNumberBuffer = 1;
       nextInputType = "";
       number1 = "";
       number2 = "";
       operator = "";
       currNumber = "";
-      console.log("clear");
+      console.log("CE");
       return;
     }
 
+
+    // "clear" button (backspace)
+    if (event.target.id === "C") {
+      // slices off the end of current number
+      currNumber = currNumber.substring(0, currNumber.length - 1);
+      console.log(currNumber);
+      return;
+    }
+    
 
     // "equal" button
     if (event.target.id === "equal") {
