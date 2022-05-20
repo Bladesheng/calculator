@@ -41,6 +41,12 @@ function operate(operator, num1, num2) {
   }
 }
 
+// writes to "currentNumber" element
+function writeCurrent(text) {
+  const currentNumberBtn = document.querySelector(".currentNumber");
+  currentNumberBtn.textContent = text;
+}
+
 
 // number buttons
 const numberBtns = document.querySelectorAll(".numberBtn");
@@ -55,6 +61,7 @@ numberBtns.forEach((button) => {
 
     // appends clicked buttons number to current number
     currNumber += event.target.id;
+    writeCurrent(currNumber);
     console.log(currNumber);
   })
 })
@@ -72,6 +79,7 @@ operatorsBtns.forEach((button) => {
       number2 = "";
       operator = "";
       currNumber = "";
+      writeCurrent("0");
       console.log("CE");
       return;
     }
@@ -81,6 +89,7 @@ operatorsBtns.forEach((button) => {
     if (event.target.id === "C") {
       // slices off the end of current number
       currNumber = currNumber.substring(0, currNumber.length - 1);
+      writeCurrent(currNumber);
       console.log(currNumber);
       return;
     }
@@ -92,6 +101,7 @@ operatorsBtns.forEach((button) => {
       number2 = currNumber;
       // calculates
       let result = operate(operator, number1, number2)
+      writeCurrent(result);
       console.log("result: " + result);
       // pushes the result to buffer 1 so you can keep
       // calculating with the result
@@ -134,6 +144,7 @@ operatorsBtns.forEach((button) => {
 
       // calculates
       let result = operate(operator, number1, number2)
+      writeCurrent(result);
       console.log("result: " + result);
 
       // pushes the result to buffer 1 so you can keep
