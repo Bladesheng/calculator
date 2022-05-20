@@ -64,8 +64,20 @@ numberBtns.forEach((button) => {
 const operatorsBtns = document.querySelectorAll(".operatorBtn")
 operatorsBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
+    // "clear" button
+    if (event.target.id === "clear") {
+      currentNumberBuffer = 1;
+      nextInputType = "";
+      number1 = "";
+      number2 = "";
+      operator = "";
+      currNumber = "";
+      console.log("clear");
+      return;
+    }
 
-    // equal button
+
+    // "equal" button
     if (event.target.id === "equal") {
       // pushes current number into buffer 2
       number2 = currNumber;
@@ -82,7 +94,7 @@ operatorsBtns.forEach((button) => {
       return;
     }
 
-    
+
     // if numbers are still being entered to buffer 1
     // (if you are still entering only numbers)
     if (currentNumberBuffer === 1) {
