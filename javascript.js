@@ -64,6 +64,25 @@ numberBtns.forEach((button) => {
 const operatorsBtns = document.querySelectorAll(".operatorBtn")
 operatorsBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
+
+    // equal button
+    if (event.target.id === "equal") {
+      // pushes current number into buffer 2
+      number2 = currNumber;
+      // calculates
+      let result = operate(operator, number1, number2)
+      console.log("result: " + result);
+      // pushes the result to buffer 1 so you can keep
+      // calculating with the result
+      number1 = result;
+      // makes sure you can change the operator on next operation
+      // instead of just doing equal again
+      currentNumberBuffer = 1;
+      // to prevent the other 2 operator checks from being done
+      return;
+    }
+
+    
     // if numbers are still being entered to buffer 1
     // (if you are still entering only numbers)
     if (currentNumberBuffer === 1) {
@@ -80,10 +99,14 @@ operatorsBtns.forEach((button) => {
       // makes sure next number will go into buffer 2
       nextInputType = "secondNumber";
     }
+
     // if numbers are being entered to buffer 2
     // (if there is a number in buffer 1 already
     // because you already did some operation before)
     else if (currentNumberBuffer === 2) {
+
+
+
       // pushes current number into buffer 2
       number2 = currNumber;
       currNumber = "";
