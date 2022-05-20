@@ -1,13 +1,11 @@
-backspace button
-
 floating point numbers
 
 division by 0
 
 round long numbers
 
-functional display
-
 keyboard support
 
 nice css
+
+squared button, other functions

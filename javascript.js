@@ -9,6 +9,8 @@ let number2 = "";
 let operator = "";
 // current number being displayed
 let currNumber = "";
+// for carrying over the result when equal button is pressed
+let overwriteNext = false;
 
 // calculation functions
 function add(num1, num2) {
@@ -41,10 +43,38 @@ function operate(operator, num1, num2) {
   }
 }
 
-// writes to "currentNumber" element
+// writes to "currentNumber" box
 function writeCurrent(text) {
-  const currentNumberBtn = document.querySelector(".currentNumber");
-  currentNumberBtn.textContent = text;
+  const currentNumberBox = document.querySelector(".currentNumber");
+  currentNumberBox.textContent = text;
+}
+
+// appends to "buffer" box
+function appendBuffer(text) {
+  const bufferBox = document.querySelector(".buffer");
+
+  if (text === "wipe") {
+    bufferBox.textContent = "";
+    return;
+  }
+
+  // if equal was pressed and then operator was pressed after
+  if (overwriteNext) {
+    // wipes the buffer and start with result of the equal operation
+    bufferBox.textContent = number1;
+    overwriteNext = false;
+  }
+
+  // if text is operator and
+  // if last character is operator (is not number) 
+  if (isNaN(text) && isNaN(bufferBox.textContent.slice(-1))) {
+    // overwrite last operator
+    bufferBox.textContent = bufferBox.textContent.slice(0, -1) + text;
+    return;
+  }
+
+  // appends text
+  bufferBox.textContent = (bufferBox.textContent + " " + text); 
 }
 
 
@@ -71,20 +101,6 @@ numberBtns.forEach((button) => {
 const operatorsBtns = document.querySelectorAll(".operatorBtn")
 operatorsBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
-    // "clear eveything" button
-    if (event.target.id === "CE") {
-      currentNumberBuffer = 1;
-      nextInputType = "";
-      number1 = "";
-      number2 = "";
-      operator = "";
-      currNumber = "";
-      writeCurrent("0");
-      console.log("CE");
-      return;
-    }
-
-
     // "clear" button (backspace)
     if (event.target.id === "C") {
       // slices off the end of current number
@@ -93,15 +109,33 @@ operatorsBtns.forEach((button) => {
       console.log(currNumber);
       return;
     }
+
+
+    // "clear eveything" button
+    if (event.target.id === "CE") {
+      currentNumberBuffer = 1;
+      nextInputType = "";
+      number1 = "";
+      number2 = "";
+      operator = "";
+      currNumber = "";
+      overwriteNext = false;
+      appendBuffer("wipe");
+      writeCurrent("0");
+      console.log("CE");
+      return;
+    }
     
 
     // "equal" button
     if (event.target.id === "equal") {
       // pushes current number into buffer 2
       number2 = currNumber;
+      appendBuffer(currNumber);
       // calculates
       let result = operate(operator, number1, number2)
       writeCurrent(result);
+      appendBuffer(event.target.textContent);
       console.log("result: " + result);
       // pushes the result to buffer 1 so you can keep
       // calculating with the result
@@ -109,6 +143,8 @@ operatorsBtns.forEach((button) => {
       // makes sure you can change the operator on next operation
       // instead of just doing equal again
       currentNumberBuffer = 1;
+      // overwrites buffer on operater press right after pressing equal 
+      overwriteNext = true;      
       // to prevent the other 2 operator checks from being done
       return;
     }
@@ -121,11 +157,13 @@ operatorsBtns.forEach((button) => {
       // before second number is entered
       if (number1 === "") {
         // pushes current number into number buffer 1
-        number1 = currNumber;     
+        number1 = currNumber;
+        appendBuffer(currNumber);     
       }
       currNumber = "";
       // changes operator
       operator = event.target.id;
+      appendBuffer(event.target.textContent);
       console.log(operator);
       // makes sure next number will go into buffer 2
       nextInputType = "secondNumber";
@@ -140,6 +178,7 @@ operatorsBtns.forEach((button) => {
 
       // pushes current number into buffer 2
       number2 = currNumber;
+      appendBuffer(currNumber);
       currNumber = "";
 
       // calculates
@@ -154,6 +193,7 @@ operatorsBtns.forEach((button) => {
       number2 = "";
       // changes operator
       operator = event.target.id;
+      appendBuffer(event.target.textContent);
       console.log(operator);
     }
   })
