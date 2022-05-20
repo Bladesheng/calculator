@@ -89,6 +89,14 @@ numberBtns.forEach((button) => {
       currentNumberBuffer = 2;
     }
 
+    // if you press number after you pressed equal
+    if (operator === "equal") {
+      number1 = "";
+      currentNumberBuffer = 1;
+      overwriteNext = false;
+      appendBuffer("wipe");
+    }
+
     // appends clicked buttons number to current number
     currNumber += event.target.id;
     writeCurrent(currNumber);
@@ -140,6 +148,8 @@ operatorsBtns.forEach((button) => {
       // pushes the result to buffer 1 so you can keep
       // calculating with the result
       number1 = result;
+      currNumber = "";
+      operator = event.target.id;
       // makes sure you can change the operator on next operation
       // instead of just doing equal again
       currentNumberBuffer = 1;
