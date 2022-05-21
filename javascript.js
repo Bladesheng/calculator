@@ -12,6 +12,8 @@ let currNumber = "";
 // for carrying over the result when equal button is pressed
 let overwriteNext = false;
 
+let decimalpointDisabled = false;
+
 // calculation functions
 function add(num1, num2) {
   return +num1 + +num2;
@@ -97,8 +99,19 @@ numberBtns.forEach((button) => {
       appendBuffer("wipe");
     }
 
+    // . button
+    if (event.target.textContent === ".") {
+      // prevents more than 1 decimal points in a number
+      if (decimalpointDisabled) {
+        return;
+      }
+      else {
+        decimalpointDisabled = true;
+      }
+    }
+
     // appends clicked buttons number to current number
-    currNumber += event.target.id;
+    currNumber += event.target.textContent;
     writeCurrent(currNumber);
     console.log(currNumber);
   })
@@ -111,6 +124,10 @@ operatorsBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
     // "clear" button (backspace)
     if (event.target.id === "C") {
+      // reeneables . button only if you deleted the . at the end
+      if (currNumber.slice(-1) === ".") {
+        decimalpointDisabled = false;
+      }
       // slices off the end of current number
       currNumber = currNumber.substring(0, currNumber.length - 1);
       writeCurrent(currNumber);
@@ -118,6 +135,10 @@ operatorsBtns.forEach((button) => {
       console.log(currNumber);
       return;
     }
+
+
+    // reenables . button
+    decimalpointDisabled = false;
 
 
     // "clear eveything" button
@@ -129,6 +150,7 @@ operatorsBtns.forEach((button) => {
       operator = "";
       currNumber = "";
       overwriteNext = false;
+      decimalpointDisabled = false;
       appendBuffer("wipe");
       writeCurrent("0");
       console.log("CE");

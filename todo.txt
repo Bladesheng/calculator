@@ -1,11 +1,11 @@
-floating point numbers
-
-division by 0
+division by 0 error
 
 round long numbers
+
+fix bug when pressing equal when no numbers were entered yet
 
 keyboard support
 
 nice css
 
-squared button, other functions
+(squared button, other functions)
