@@ -169,7 +169,7 @@ function operatorsInput(element) {
     let result = operate(operator, number1, number2)
 
     // division by 0
-    if (result === Infinity) {
+    if (!Number.isFinite(result)) {
       divBy0();
       return;
     }
@@ -222,7 +222,7 @@ function operatorsInput(element) {
     let result = operate(operator, number1, number2)
 
     // division by 0
-    if (result === Infinity) {
+    if (!Number.isFinite(result)) {
       divBy0();
       return;
     }
