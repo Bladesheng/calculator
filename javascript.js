@@ -178,10 +178,14 @@ function operatorsInput(element) {
     // if no second number was entered, repeat previous number
     if (currNumber === "") {
       operator = operatorPrevious;
-      currNumber = number1;
       appendBuffer("wipe");
+      appendBuffer(number1);
       // text of the previous operator's button
       appendBuffer(document.querySelector(`#${operator}`).textContent);
+      // if theres no number 2 because you are chaining operations
+      if (number2 === "") {
+        number2 = number1;
+      }
       currNumber = number2;
     }
 
@@ -205,8 +209,6 @@ function operatorsInput(element) {
     // makes sure you can change the operator on next operation
     // instead of just doing equal again
     currentNumberBuffer = 1;
-    // overwrites buffer on operater press right after pressing equal 
-    overwriteNext = true;      
     // to prevent the other 2 operator checks from being done
     return;
   }
@@ -223,6 +225,10 @@ function operatorsInput(element) {
       appendBuffer(currNumber);     
     }
     currNumber = "";
+    if (operator === "equal" && operatorPrevious !== "equal") {
+      // overwrites buffer on operator press right after pressing equal 
+      overwriteNext = true;
+    }
     operator = operatorPrevious = element.id;
     appendBuffer(element.textContent);
     console.log(operator);

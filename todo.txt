@@ -1,5 +1,4 @@
-make it possible to change operator when chaining operations
-- should also work with =
+make sure that deleting last number only sets the display to 0, not the currNumber
 
 nice css
 
