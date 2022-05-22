@@ -1,10 +1,10 @@
 division by 0 error
 
-round long numbers
-
-fix bug when pressing equal when no numbers were entered yet
+trim comments
 
 keyboard support
+
+round long numbers and buffer
 
 nice css
 

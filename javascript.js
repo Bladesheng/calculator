@@ -79,6 +79,25 @@ function appendBuffer(text) {
   bufferBox.textContent = (bufferBox.textContent + " " + text); 
 }
 
+function resetAll() {
+  currentNumberBuffer = 1;
+  nextInputType = "";
+  number1 = "";
+  number2 = "";
+  operator = "";
+  currNumber = "";
+  overwriteNext = false;
+  decimalpointDisabled = false;
+  appendBuffer("wipe");
+  writeCurrent("0");
+}
+
+function divBy0() {
+  resetAll();
+  writeCurrent("Ruh Roh");
+  console.log("Division by 0 Ruh Roh");
+}
+
 
 // number buttons
 const numberBtns = document.querySelectorAll(".numberBtn");
@@ -143,16 +162,7 @@ operatorsBtns.forEach((button) => {
 
     // "clear eveything" button
     if (event.target.id === "CE") {
-      currentNumberBuffer = 1;
-      nextInputType = "";
-      number1 = "";
-      number2 = "";
-      operator = "";
-      currNumber = "";
-      overwriteNext = false;
-      decimalpointDisabled = false;
-      appendBuffer("wipe");
-      writeCurrent("0");
+      resetAll();
       console.log("CE");
       return;
     }
@@ -165,6 +175,13 @@ operatorsBtns.forEach((button) => {
       appendBuffer(currNumber);
       // calculates
       let result = operate(operator, number1, number2)
+
+      // division by 0
+      if (result === Infinity) {
+        divBy0();
+        return;
+      }
+
       writeCurrent(result);
       appendBuffer(event.target.textContent);
       console.log("result: " + result);
@@ -216,6 +233,11 @@ operatorsBtns.forEach((button) => {
 
       // calculates
       let result = operate(operator, number1, number2)
+      // division by 0
+      if (result === Infinity) {
+        divBy0();
+        return;
+      }
       writeCurrent(result);
       console.log("result: " + result);
 
