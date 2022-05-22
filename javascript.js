@@ -99,7 +99,7 @@ function divBy0() {
 
 
 
-// number buttons
+// number buttons functionality
 function numbersInput(element) {
   // if first number was already entered
   if (nextInputType === "secondNumber") {
@@ -134,7 +134,7 @@ function numbersInput(element) {
 }
 
 
-// operator buttons
+// operator buttons functionality
 function operatorsInput(element) {
   // "clear" button (backspace)
   if (element.id === "C") {
@@ -144,6 +144,10 @@ function operatorsInput(element) {
     }
     // slices off the end of current number
     currNumber = currNumber.substring(0, currNumber.length - 1);
+    // if you sliced off the last number
+    if (currNumber === "") {
+      currNumber = "0";
+    }
     writeCurrent(currNumber);
     console.log("C");
     console.log(currNumber);
