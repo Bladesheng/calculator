@@ -1,8 +1,5 @@
 make it possible to change operator when chaining operations
-
-bug - if you press number, then operator, then enter
-- the number from buffer 1 (current number) should be copied into buffer 2
-- same thing when chaining operations
+- should also work with =
 
 nice css
 

@@ -13,6 +13,8 @@ let overwriteNext = false;
 
 let decimalpointDisabled = false;
 
+let operatorPrevious = "";
+
 // calculation functions
 function add(num1, num2) {
   return +num1 + +num2;
@@ -86,6 +88,7 @@ function resetAll() {
   currNumber = "";
   overwriteNext = false;
   decimalpointDisabled = false;
+  operatorPrevious = "";
   appendBuffer("wipe");
   writeCurrent("0");
 }
@@ -165,13 +168,26 @@ function operatorsInput(element) {
   }
 
   // "equal" button
-  if (element.id === "equal") {
-    // pushes current number into buffer 2
-    number2 = currNumber;
+  if (element.id === "equal") {    
+    // prevents overwriting buffer 2 when pressing enter continuously
+    if (currNumber !== "") {
+      // pushes current number into buffer 2
+      number2 = currNumber;
+    }
+
+    // if no second number was entered, repeat previous number
+    if (currNumber === "") {
+      operator = operatorPrevious;
+      currNumber = number1;
+      appendBuffer("wipe");
+      // text of the previous operator's button
+      appendBuffer(document.querySelector(`#${operator}`).textContent);
+      currNumber = number2;
+    }
+
     appendBuffer(currNumber);
 
-    let result = operate(operator, number1, number2)
-
+    let result = operate(operator, number1, number2);
     // division by 0
     if (!Number.isFinite(result)) {
       divBy0();
@@ -207,7 +223,7 @@ function operatorsInput(element) {
       appendBuffer(currNumber);     
     }
     currNumber = "";
-    operator = element.id;
+    operator = operatorPrevious = element.id;
     appendBuffer(element.textContent);
     console.log(operator);
     // makes sure next number will go into buffer 2
@@ -223,7 +239,7 @@ function operatorsInput(element) {
     appendBuffer(currNumber);
     currNumber = "";
 
-    let result = operate(operator, number1, number2)
+    let result = operate(operator, number1, number2);
 
     // division by 0
     if (!Number.isFinite(result)) {
