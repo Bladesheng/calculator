@@ -1,4 +1,3 @@
-// start writing numbers into first number buffer
 let currentNumberBuffer = 1;
 // changes depending on whether first number was already entered
 let nextInputType = "";
@@ -31,7 +30,6 @@ function divide(num1, num2) {
   return +num1 / +num2; 
 }
 
-// takes 2 numbers and performs operation on them
 function operate(operator, num1, num2) {
   switch(operator) {
     case "add":
@@ -45,7 +43,6 @@ function operate(operator, num1, num2) {
   }
 }
 
-// writes to "currentNumber" box
 function writeCurrent(text) {
   const currentNumberBox = document.querySelector(".currentNumber");
   currentNumberBox.textContent = text;
@@ -75,9 +72,10 @@ function appendBuffer(text) {
     return;
   }
 
-  // appends text
+  // appends text to buffer
   bufferBox.textContent = (bufferBox.textContent + " " + text); 
 }
+
 
 function resetAll() {
   currentNumberBuffer = 1;
@@ -155,10 +153,8 @@ operatorsBtns.forEach((button) => {
       return;
     }
 
-
     // reenables . button
     decimalpointDisabled = false;
-
 
     // "clear eveything" button
     if (event.target.id === "CE") {
@@ -166,14 +162,13 @@ operatorsBtns.forEach((button) => {
       console.log("CE");
       return;
     }
-    
 
     // "equal" button
     if (event.target.id === "equal") {
       // pushes current number into buffer 2
       number2 = currNumber;
       appendBuffer(currNumber);
-      // calculates
+
       let result = operate(operator, number1, number2)
 
       // division by 0
@@ -211,7 +206,6 @@ operatorsBtns.forEach((button) => {
         appendBuffer(currNumber);     
       }
       currNumber = "";
-      // changes operator
       operator = event.target.id;
       appendBuffer(event.target.textContent);
       console.log(operator);
@@ -223,21 +217,19 @@ operatorsBtns.forEach((button) => {
     // (if there is a number in buffer 1 already
     // because you already did some operation before)
     else if (currentNumberBuffer === 2) {
-
-
-
       // pushes current number into buffer 2
       number2 = currNumber;
       appendBuffer(currNumber);
       currNumber = "";
 
-      // calculates
       let result = operate(operator, number1, number2)
+
       // division by 0
       if (result === Infinity) {
         divBy0();
         return;
       }
+
       writeCurrent(result);
       console.log("result: " + result);
 
@@ -246,7 +238,6 @@ operatorsBtns.forEach((button) => {
       number1 = result;
       // resets second buffer to be ready for new number input
       number2 = "";
-      // changes operator
       operator = event.target.id;
       appendBuffer(event.target.textContent);
       console.log(operator);

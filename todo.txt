@@ -1,7 +1,3 @@
-division by 0 error
-
-trim comments
-
 keyboard support
 
 round long numbers and buffer
