@@ -149,9 +149,11 @@ function operatorsInput(element) {
     currNumber = currNumber.substring(0, currNumber.length - 1);
     // if you sliced off the last number
     if (currNumber === "") {
-      currNumber = "0";
+      writeCurrent("0");
     }
-    writeCurrent(currNumber);
+    else {
+      writeCurrent(currNumber);
+    }
     console.log("C");
     console.log(currNumber);
     return;
