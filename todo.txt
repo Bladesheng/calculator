@@ -1,6 +1,4 @@
-keyboard support
-
-round long numbers and buffer
+round long buffer
 
 nice css
 
