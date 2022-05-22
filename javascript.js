@@ -234,6 +234,14 @@ function operatorsInput(element) {
   // (if there is a number in buffer 1 already
   // because you already did some operation before)
   else if (currentNumberBuffer === 2) {
+    // if you want to change operator before continuing the chaining
+    if (currNumber === "") {
+      operator = operatorPrevious = element.id;
+      console.log(operator);
+      appendBuffer(element.textContent);
+      return;
+    }
+
     // pushes current number into buffer 2
     number2 = currNumber;
     appendBuffer(currNumber);
