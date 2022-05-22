@@ -97,150 +97,163 @@ function divBy0() {
 }
 
 
+
+
 // number buttons
-const numberBtns = document.querySelectorAll(".numberBtn");
-numberBtns.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    // if first number was already entered
-    if (nextInputType === "secondNumber") {
-      // next click on operator will push the number into buffer 2
-      // and will calculate the result
-      currentNumberBuffer = 2;
-    }
+function numbersInput(element) {
+  // if first number was already entered
+  if (nextInputType === "secondNumber") {
+    // next click on operator will push the number into buffer 2
+    // and will calculate the result
+    currentNumberBuffer = 2;
+  }
 
-    // if you press number after you pressed equal
-    if (operator === "equal") {
-      number1 = "";
-      currentNumberBuffer = 1;
-      overwriteNext = false;
-      appendBuffer("wipe");
-    }
+  // if you press number after you pressed equal
+  if (operator === "equal") {
+    number1 = "";
+    currentNumberBuffer = 1;
+    overwriteNext = false;
+    appendBuffer("wipe");
+  }
 
-    // . button
-    if (event.target.textContent === ".") {
-      // prevents more than 1 decimal points in a number
-      if (decimalpointDisabled) {
-        return;
-      }
-      else {
-        decimalpointDisabled = true;
-      }
+  // . button
+  if (element.textContent === ".") {
+    // prevents more than 1 decimal points in a number
+    if (decimalpointDisabled) {
+      return;
     }
+    else {
+      decimalpointDisabled = true;
+    }
+  }
 
-    // appends clicked buttons number to current number
-    currNumber += event.target.textContent;
-    writeCurrent(currNumber);
-    console.log(currNumber);
-  })
-})
+  // appends clicked buttons number to current number
+  currNumber += element.textContent;
+  writeCurrent(currNumber);
+  console.log(currNumber);
+}
 
 
 // operator buttons
+function operatorsInput(element) {
+  // "clear" button (backspace)
+  if (element.id === "C") {
+    // reeneables . button only if you deleted the . at the end
+    if (currNumber.slice(-1) === ".") {
+      decimalpointDisabled = false;
+    }
+    // slices off the end of current number
+    currNumber = currNumber.substring(0, currNumber.length - 1);
+    writeCurrent(currNumber);
+    console.log("C");
+    console.log(currNumber);
+    return;
+  }
+
+  // reenables . button
+  decimalpointDisabled = false;
+
+  // "clear eveything" button
+  if (element.id === "CE") {
+    resetAll();
+    console.log("CE");
+    return;
+  }
+
+  // "equal" button
+  if (element.id === "equal") {
+    // pushes current number into buffer 2
+    number2 = currNumber;
+    appendBuffer(currNumber);
+
+    let result = operate(operator, number1, number2)
+
+    // division by 0
+    if (result === Infinity) {
+      divBy0();
+      return;
+    }
+
+    writeCurrent(result);
+    appendBuffer(element.textContent);
+    console.log("result: " + result);
+    // pushes the result to buffer 1 so you can keep
+    // calculating with the result
+    number1 = result;
+    currNumber = "";
+    operator = element.id;
+    // makes sure you can change the operator on next operation
+    // instead of just doing equal again
+    currentNumberBuffer = 1;
+    // overwrites buffer on operater press right after pressing equal 
+    overwriteNext = true;      
+    // to prevent the other 2 operator checks from being done
+    return;
+  }
+
+
+  // if numbers are still being entered to buffer 1
+  // (if you are still entering only numbers)
+  if (currentNumberBuffer === 1) {
+    // prevents overwriting buffer 1 if you want to change operator
+    // before second number is entered
+    if (number1 === "") {
+      // pushes current number into number buffer 1
+      number1 = currNumber;
+      appendBuffer(currNumber);     
+    }
+    currNumber = "";
+    operator = element.id;
+    appendBuffer(element.textContent);
+    console.log(operator);
+    // makes sure next number will go into buffer 2
+    nextInputType = "secondNumber";
+  }
+
+  // if numbers are being entered to buffer 2
+  // (if there is a number in buffer 1 already
+  // because you already did some operation before)
+  else if (currentNumberBuffer === 2) {
+    // pushes current number into buffer 2
+    number2 = currNumber;
+    appendBuffer(currNumber);
+    currNumber = "";
+
+    let result = operate(operator, number1, number2)
+
+    // division by 0
+    if (result === Infinity) {
+      divBy0();
+      return;
+    }
+
+    writeCurrent(result);
+    console.log("result: " + result);
+
+    // pushes the result to buffer 1 so you can keep
+    // calculating with the result
+    number1 = result;
+    // resets second buffer to be ready for new number input
+    number2 = "";
+    operator = element.id;
+    appendBuffer(element.textContent);
+    console.log(operator);
+  }
+}
+
+
+const numberBtns = document.querySelectorAll(".numberBtn");
+numberBtns.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    numbersInput(event.target)});
+})
+
 const operatorsBtns = document.querySelectorAll(".operatorBtn")
 operatorsBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
-    // "clear" button (backspace)
-    if (event.target.id === "C") {
-      // reeneables . button only if you deleted the . at the end
-      if (currNumber.slice(-1) === ".") {
-        decimalpointDisabled = false;
-      }
-      // slices off the end of current number
-      currNumber = currNumber.substring(0, currNumber.length - 1);
-      writeCurrent(currNumber);
-      console.log("C");
-      console.log(currNumber);
-      return;
-    }
+    operatorsInput(event.target)});
+})
 
-    // reenables . button
-    decimalpointDisabled = false;
-
-    // "clear eveything" button
-    if (event.target.id === "CE") {
-      resetAll();
-      console.log("CE");
-      return;
-    }
-
-    // "equal" button
-    if (event.target.id === "equal") {
-      // pushes current number into buffer 2
-      number2 = currNumber;
-      appendBuffer(currNumber);
-
-      let result = operate(operator, number1, number2)
-
-      // division by 0
-      if (result === Infinity) {
-        divBy0();
-        return;
-      }
-
-      writeCurrent(result);
-      appendBuffer(event.target.textContent);
-      console.log("result: " + result);
-      // pushes the result to buffer 1 so you can keep
-      // calculating with the result
-      number1 = result;
-      currNumber = "";
-      operator = event.target.id;
-      // makes sure you can change the operator on next operation
-      // instead of just doing equal again
-      currentNumberBuffer = 1;
-      // overwrites buffer on operater press right after pressing equal 
-      overwriteNext = true;      
-      // to prevent the other 2 operator checks from being done
-      return;
-    }
-
-
-    // if numbers are still being entered to buffer 1
-    // (if you are still entering only numbers)
-    if (currentNumberBuffer === 1) {
-      // prevents overwriting buffer 1 if you want to change operator
-      // before second number is entered
-      if (number1 === "") {
-        // pushes current number into number buffer 1
-        number1 = currNumber;
-        appendBuffer(currNumber);     
-      }
-      currNumber = "";
-      operator = event.target.id;
-      appendBuffer(event.target.textContent);
-      console.log(operator);
-      // makes sure next number will go into buffer 2
-      nextInputType = "secondNumber";
-    }
-
-    // if numbers are being entered to buffer 2
-    // (if there is a number in buffer 1 already
-    // because you already did some operation before)
-    else if (currentNumberBuffer === 2) {
-      // pushes current number into buffer 2
-      number2 = currNumber;
-      appendBuffer(currNumber);
-      currNumber = "";
-
-      let result = operate(operator, number1, number2)
-
-      // division by 0
-      if (result === Infinity) {
-        divBy0();
-        return;
-      }
-
-      writeCurrent(result);
-      console.log("result: " + result);
-
-      // pushes the result to buffer 1 so you can keep
-      // calculating with the result
-      number1 = result;
-      // resets second buffer to be ready for new number input
-      number2 = "";
-      operator = event.target.id;
-      appendBuffer(event.target.textContent);
-      console.log(operator);
-    }
-  })
+window.addEventListener("keydown", (event) => {
+  console.log(event);
 })
