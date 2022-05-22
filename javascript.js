@@ -242,6 +242,7 @@ function operatorsInput(element) {
 }
 
 
+// mouse inputs
 const numberBtns = document.querySelectorAll(".numberBtn");
 numberBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
@@ -254,6 +255,15 @@ operatorsBtns.forEach((button) => {
     operatorsInput(event.target)});
 })
 
-window.addEventListener("keydown", (event) => {
-  console.log(event);
+// keyboard inputs
+document.addEventListener("keydown", (event) => {
+  const pressedNumberBtn = document.querySelector(`button[data-key="${event.key}"].numberBtn`);
+  const pressedOperatorBtn = document.querySelector(`button[data-key="${event.key}"].operatorBtn`);
+
+  if (pressedNumberBtn) {
+    numbersInput(pressedNumberBtn);
+  }
+  else if (pressedOperatorBtn) {
+    operatorsInput(pressedOperatorBtn);
+  }
 })
