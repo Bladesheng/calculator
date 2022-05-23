@@ -186,8 +186,17 @@ function operatorsInput(element) {
       number2 = currNumber;
     }
 
+    // prevents errors if you are pressing enter without any numbers
+    if (currNumber === "" && number1 === "" && number2 === "") {
+      return;
+    }
+
     // if no second number was entered, repeat previous number
     if (currNumber === "") {
+      // prevents bugs when you keep pressing enter
+      if (operatorPrevious === "") {
+        operatorPrevious = operator;
+      }
       operator = operatorPrevious;
       appendBuffer("wipe");
       appendBuffer(number1);
@@ -203,6 +212,12 @@ function operatorsInput(element) {
     appendBuffer(currNumber);
 
     let result = operate(operator, number1, number2);
+    // if you entered number and then pressed enter (you get undefined)
+    if (result === undefined) {
+      result = +currNumber;
+
+    }
+
     // division by 0
     if (!Number.isFinite(result)) {
       divBy0();
