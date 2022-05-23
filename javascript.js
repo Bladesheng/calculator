@@ -131,8 +131,12 @@ function numbersInput(element) {
   }
 
   // makes it impossible to enter multiple zeroes
-  if (currNumber === "0") {
+  if (currNumber === "0" && element.textContent === "0") {
     return;
+  }
+  // prevents extra 0 at the start if you pressed 0 before
+  else if (currNumber === "0" && element.textContent !== "0") {
+    currNumber = "";
   }
 
   // appends clicked buttons number to current number
