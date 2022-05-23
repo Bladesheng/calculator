@@ -130,6 +130,11 @@ function numbersInput(element) {
     }
   }
 
+  // makes it impossible to enter multiple zeroes
+  if (currNumber === "0") {
+    return;
+  }
+
   // appends clicked buttons number to current number
   currNumber += element.textContent;
   writeCurrent(currNumber);

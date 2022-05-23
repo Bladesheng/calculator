@@ -1,3 +1,5 @@
+fix error when pressing enter continually
+
 nice css
 
 round long buffer to prevent overflow (in css)
