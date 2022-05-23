@@ -32,6 +32,10 @@ function divide(num1, num2) {
   return +num1 / +num2; 
 }
 
+function square(num1, num2) {
+  return (+num1) ** (+num2); 
+}
+
 function operate(operator, num1, num2) {
   switch(operator) {
     case "add":
@@ -42,6 +46,8 @@ function operate(operator, num1, num2) {
       return multiply(num1, num2);
     case "divide":
       return divide(num1, num2);
+    case "square":
+      return square(num1, num2);   
   }
 }
 
