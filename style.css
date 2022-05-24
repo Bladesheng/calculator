@@ -11,12 +11,6 @@ body {
   flex-flow: column;
 }
 
-/* HEADER */
-
-.header {
-  flex: 0 1 auto;
-}
-
 /* MAIN */
 
 .main {
