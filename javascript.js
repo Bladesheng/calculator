@@ -173,7 +173,7 @@ function numbersInput(element) {
 // operator buttons functionality
 function operatorsInput(element) {
   // "clear" button (backspace)
-  if (element.id === "DEL") {
+  if (element.id === "C") {
     // reeneables . button only if you deleted the . at the end
     if (currNumber.slice(-1) === ".") {
       decimalpointDisabled = false;
@@ -187,7 +187,7 @@ function operatorsInput(element) {
     else {
       writeCurrent(currNumber);
     }
-    console.log("DEL");
+    console.log("C");
     console.log(currNumber);
     return;
   }
