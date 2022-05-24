@@ -28,6 +28,7 @@ body {
 }
 
 .calculator {
+  width: 76.5vw;
   display: flex;
   flex-flow: column;
   gap: 10px;
@@ -45,7 +46,6 @@ body {
 
 .bufferTrim {
   flex: 0 1 6vw;
-  width: 76.5vw;
   
   font-size: 6vw;
   font-weight: 400;
@@ -89,7 +89,6 @@ button {
   border-radius: 50%;
   height: 18vw;
   width: 18vw;
-  
 }
 
 .zero {
@@ -126,4 +125,41 @@ button {
 a {
   text-decoration: none;
   color: rgb(80, 80, 80);
+}
+
+
+/* Desktop scaling */
+@media (min-width:500px) {
+  .calculator {
+    width: 43vh;
+  }
+
+  .bufferTrim {
+    flex-basis: 3vh;    
+    font-size: 3vh;
+  }
+
+  .currentNumber {
+    font-size: 8vh;
+    width: 43vh;
+  }
+  
+  .keyboard {
+    gap: 1vh;
+  }
+  
+  button {
+    font-size: 5vh;
+    height: 10vh;
+    width: 10vh;
+  }
+  
+  .zero {
+    width: 20vh;
+    border-radius: 5vh;
+  }
+  
+  #equal, #add, #substract, #multiply, #divide, #square {
+    font-size: 6vh;
+  }
 }
