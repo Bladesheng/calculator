@@ -53,16 +53,7 @@ function operate(operator, num1, num2) {
 
 function writeCurrent(text) {
   const currentNumberBox = document.querySelector(".currentNumber");
-
-  const maxLength = 11;
-  // prevents overflow while still being able to see last few numbers
-  if (text.length > maxLength) {
-    let textNew = "..." + text.slice(-(maxLength - 2));
-    currentNumberBox.textContent = textNew;
-  }
-  else {
-    currentNumberBox.textContent = text;
-  }
+  currentNumberBox.textContent = text;
 }
 
 // appends to "buffer" box
@@ -90,16 +81,7 @@ function appendBuffer(text) {
   }
 
   // appends text to buffer
-
-  // prevents overflow while still being able to see last few numbers
-  const maxLength = 11;
-  if ((bufferBox.textContent.length + 1 + text.length) > maxLength) {
-    let textNew = "..." + (bufferBox.textContent + " " + text).slice(-(maxLength - 2));
-    bufferBox.textContent = textNew;
-  }
-  else {
-    bufferBox.textContent = (bufferBox.textContent + " " + text); 
-  }
+  bufferBox.textContent = (bufferBox.textContent + " " + text); 
 }
 
 

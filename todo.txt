@@ -1,5 +1,7 @@
 nice css
 
+import only used fonts
+
 round long buffer to prevent overflow (in css)
 - fix entering too long numbers (prevent entering too long numbers)
 

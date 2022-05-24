@@ -40,36 +40,34 @@ body {
 .display {
   display: flex;
   flex-flow: column;
-
-
   text-align: right;
-  font-size: 18vw;
-  font-weight: 500;
-
-  border: 1px red solid;
 }
 
-.buffer {
-  flex: 0 1 20vw;
-
-
-  width: 200px;
+.bufferTrim {
+  flex: 0 1 6vw;
+  width: 76.5vw;
+  
+  font-size: 6vw;
+  font-weight: 400;
+  color: rgb(180, 180, 180);
+  
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: clip;
+  }
 
-  border: 1px green solid;
+.buffer {
+  float: right;
 }
 
 .currentNumber {
-  flex: 0 1 20vW;
-
-  width: 200px;
+  flex: 0 1 content;
+  
+  font-size: 15vw;
+  font-weight: 500;
+  width: 76.5vw;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: clip;
-
-  border: 1px greenyellow solid;
+  direction: rtl;
 }
 
 /* KEYBOARD */
@@ -109,6 +107,7 @@ button {
 }
 
 #AC, #C {
+  color: rgb(0, 0, 0);
   background-color: rgb(159, 159, 159);
 }
 
@@ -119,9 +118,8 @@ button {
   font-size: 12px;
   text-align: center;
   padding: 10px;
-
   color: rgb(180, 180, 180);
-  
+ 
   flex: 0 1 auto;
 }
 
