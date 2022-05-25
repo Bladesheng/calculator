@@ -15,6 +15,10 @@ let decimalpointDisabled = false;
 
 let operatorPrevious = "";
 
+// disables console logs
+console.log = function() {}
+
+
 // calculation functions
 function add(num1, num2) {
   return +num1 + +num2;
@@ -54,7 +58,7 @@ function operate(operator, num1, num2) {
 function writeCurrent(text) {
   const currentNumberBox = document.querySelector(".currentNumber");
   // prevents too long numbers
-  if (text.length > 12) {
+  if (text.toString().length > 12) {
     text = Number.parseFloat(text).toExponential(8);
   }
   else {
