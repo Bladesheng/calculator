@@ -53,6 +53,16 @@ function operate(operator, num1, num2) {
 
 function writeCurrent(text) {
   const currentNumberBox = document.querySelector(".currentNumber");
+  // prevents too long numbers
+  if (text.length > 12) {
+    text = Number.parseFloat(text).toExponential(8);
+  }
+  else {
+    // puts space between every 3 numbers
+    let parts = text.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    text = parts.join(".");
+  }
   currentNumberBox.textContent = text;
 }
 

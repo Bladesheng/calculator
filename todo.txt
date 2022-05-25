@@ -2,4 +2,6 @@ nice css
 
 import only used fonts
 
+add more keyboard inputs
+
 (squared button, other functions)
