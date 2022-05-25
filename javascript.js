@@ -54,12 +54,16 @@ function operate(operator, num1, num2) {
 
 function writeCurrent(text) {
   const currentNumberBox = document.querySelector(".currentNumber");
+
+  if (text === "Division by 0") {
+    // skip number checks
+  }
   // prevents too long numbers
-  if (text.toString().length > 12) {
+  else if (text.toString().length > 12) {
     text = Number.parseFloat(text).toExponential(8);
   }
+  // puts space between every 3 numbers
   else {
-    // puts space between every 3 numbers
     let parts = text.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     text = parts.join(".");

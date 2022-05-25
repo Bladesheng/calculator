@@ -1,7 +1,3 @@
 button effects
 - button press
 - button hover
-
-add more keyboard inputs
-- . and ,
-- backspace and delete
