@@ -2,7 +2,6 @@ nice css
 
 import only used fonts
 
-round long buffer to prevent overflow (in css)
-- fix entering too long numbers (prevent entering too long numbers)
+fix 0 being removed when entering 0.something
 
 (squared button, other functions)
