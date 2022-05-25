@@ -141,7 +141,9 @@ function numbersInput(element) {
     return;
   }
   // prevents extra 0 at the start if you pressed 0 before
-  else if (currNumber === "0" && element.textContent !== "0") {
+  // to prevent numbers like 0123
+  // but still allows to enter . after 0 (without removing the 0)
+  else if (currNumber === "0" && element.textContent !== "0" && element.textContent !== ".") {
     currNumber = "";
   }
 
