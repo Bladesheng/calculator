@@ -15,9 +15,6 @@ let decimalpointDisabled = false;
 
 let operatorPrevious = "";
 
-// disables console logs
-console.log = function() {}
-
 
 // calculation functions
 function add(num1, num2) {
@@ -115,8 +112,7 @@ function resetAll() {
 
 function divBy0() {
   resetAll();
-  writeCurrent("Ruh Roh");
-  console.log("Division by 0 Ruh Roh");
+  writeCurrent("Division by 0");
 }
 
 
@@ -164,7 +160,6 @@ function numbersInput(element) {
   // appends clicked buttons number to current number
   currNumber += element.textContent;
   writeCurrent(currNumber);
-  console.log(currNumber);
 }
 
 
@@ -185,8 +180,6 @@ function operatorsInput(element) {
     else {
       writeCurrent(currNumber);
     }
-    console.log("C");
-    console.log(currNumber);
     return;
   }
 
@@ -196,7 +189,6 @@ function operatorsInput(element) {
   // "clear eveything" button
   if (element.id === "AC") {
     resetAll();
-    console.log("AC");
     return;
   }
 
@@ -248,7 +240,6 @@ function operatorsInput(element) {
 
     writeCurrent(result);
     appendBuffer(element.textContent);
-    console.log("result: " + result);
     // pushes the result to buffer 1 so you can keep
     // calculating with the result
     number1 = result;
@@ -279,7 +270,6 @@ function operatorsInput(element) {
     }
     operator = operatorPrevious = element.id;
     appendBuffer(element.textContent);
-    console.log(operator);
     // makes sure next number will go into buffer 2
     nextInputType = "secondNumber";
   }
@@ -291,7 +281,6 @@ function operatorsInput(element) {
     // if you want to change operator before continuing the chaining
     if (currNumber === "") {
       operator = operatorPrevious = element.id;
-      console.log(operator);
       appendBuffer(element.textContent);
       return;
     }
@@ -310,7 +299,6 @@ function operatorsInput(element) {
     }
 
     writeCurrent(result);
-    console.log("result: " + result);
 
     // pushes the result to buffer 1 so you can keep
     // calculating with the result
@@ -319,7 +307,6 @@ function operatorsInput(element) {
     number2 = "";
     operator = element.id;
     appendBuffer(element.textContent);
-    console.log(operator);
   }
 }
 
@@ -339,8 +326,14 @@ operatorsBtns.forEach((button) => {
 
 // keyboard inputs
 document.addEventListener("keydown", (event) => {
-  const pressedNumberBtn = document.querySelector(`button[data-key="${event.key}"].numberBtn`);
-  const pressedOperatorBtn = document.querySelector(`button[data-key="${event.key}"].operatorBtn`);
+  let pressedKey = event.key;
+
+  if (pressedKey === ",") {
+    pressedKey = ".";
+  }
+  
+  const pressedNumberBtn = document.querySelector(`button[data-key="${pressedKey}"].numberBtn`);
+  const pressedOperatorBtn = document.querySelector(`button[data-key="${pressedKey}"].operatorBtn`);
 
   if (pressedNumberBtn) {
     numbersInput(pressedNumberBtn);

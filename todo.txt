@@ -1,7 +1,7 @@
-nice css
-
-import only used fonts
+button effects
+- button press
+- button hover
 
 add more keyboard inputs
-
-(squared button, other functions)
+- . and ,
+- backspace and delete
