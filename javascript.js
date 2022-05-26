@@ -349,7 +349,7 @@ document.addEventListener("keydown", (event) => {
   }
 })
 
-// ripple function
+// ripple effect
 function createRipple(event) {
   const button = event.currentTarget;
 

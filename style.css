@@ -125,6 +125,7 @@ button:hover {
 }
 
 span.ripple {
+  pointer-events: none;
   position: absolute;
   border-radius: 50%;
   transform: scale(0);
