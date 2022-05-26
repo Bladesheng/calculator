@@ -1,6 +1,4 @@
 button effects
 - keyboard press
 
-makes ripple effect smoother
-
 tighter layout on mobile
