@@ -115,6 +115,10 @@ button {
   background-color: rgb(159, 159, 159);
 }
 
+button:hover {
+  filter: brightness(1.2);
+}
+
 span.ripple {
   position: absolute;
   border-radius: 50%;

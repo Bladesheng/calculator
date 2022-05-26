@@ -1,6 +1,5 @@
 button effects
 - keyboard press
-- button hover
 
 makes ripple effect smoother
 
