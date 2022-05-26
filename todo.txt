@@ -1,3 +1,7 @@
 button effects
-- button press
+- keyboard press
 - button hover
+
+makes ripple effect smoother
+
+tighter layout on mobile

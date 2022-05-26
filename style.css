@@ -86,6 +86,11 @@ button {
   border-radius: 50%;
   height: 18vw;
   width: 18vw;
+
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 400ms;
 }
 
 .zero {
@@ -105,6 +110,21 @@ button {
 #AC, #C {
   color: rgb(0, 0, 0);
   background-color: rgb(159, 159, 159);
+}
+
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 600ms linear;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 

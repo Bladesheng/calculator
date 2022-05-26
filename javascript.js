@@ -319,12 +319,14 @@ function operatorsInput(element) {
 const numberBtns = document.querySelectorAll(".numberBtn");
 numberBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
+    createRipple(event);
     numbersInput(event.target)});
 })
 
 const operatorsBtns = document.querySelectorAll(".operatorBtn")
 operatorsBtns.forEach((button) => {
   button.addEventListener("click", (event) => {
+    createRipple(event);
     operatorsInput(event.target)});
 })
 
@@ -346,3 +348,19 @@ document.addEventListener("keydown", (event) => {
     operatorsInput(pressedOperatorBtn);
   }
 })
+
+// ripple function
+function createRipple(event) {
+  const button = event.currentTarget;
+
+  const circle = document.createElement("span");
+  const diameter = Math.max(button.clientWidth, button.clientHeight);
+  const radius = diameter / 2;
+
+  circle.style.width = circle.style.height = `${diameter}px`;
+  circle.style.left = `${event.clientX - (button.offsetLeft + radius)}px`;
+  circle.style.top = `${event.clientY - (button.offsetTop + radius)}px`;
+  circle.classList.add("ripple");
+
+  button.appendChild(circle);
+}
