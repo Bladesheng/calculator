@@ -83,6 +83,7 @@ button {
   font-size: 9vw;
   background-color: rgb(49, 49, 49);
   border: none;
+  outline: none;
   border-radius: 50%;
   height: 18vw;
   width: 18vw;
