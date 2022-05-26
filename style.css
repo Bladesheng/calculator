@@ -96,7 +96,7 @@ button {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: background 400ms;
+  transition: all 32ms;
   /* remove blue highlighting on mobile */
   -webkit-tap-highlight-color: transparent;
 }
@@ -139,6 +139,14 @@ span.ripple {
     transform: scale(3);
     opacity: 0;
   }
+}
+
+.pressed {
+  filter: brightness(2);
+}
+
+.pressed.operatorBtn {
+  filter: brightness(1.4);
 }
 
 

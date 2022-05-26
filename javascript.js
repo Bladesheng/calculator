@@ -342,12 +342,35 @@ document.addEventListener("keydown", (event) => {
   const pressedOperatorBtn = document.querySelector(`button[data-key="${pressedKey}"].operatorBtn`);
 
   if (pressedNumberBtn) {
-    numbersInput(pressedNumberBtn);
+    pressedNumberBtn.classList.add("pressed");
+    // using 32ms delay, roughly same as default windows keyboard delay
+    // to prevent getting stuck in pressed state
+    setTimeout(() => {removeTransition(pressedNumberBtn)}, 32);
+    numbersInput(pressedNumberBtn); 
   }
   else if (pressedOperatorBtn) {
+    pressedOperatorBtn.classList.add("pressed");
+    setTimeout(() => {removeTransition(pressedOperatorBtn)}, 32);
     operatorsInput(pressedOperatorBtn);
   }
 })
+
+
+// Removes pressed effect.
+// Using this after transitionend and also with set delay after keypress
+// to avoid having the button "stuck" in pressed state (with javascript)
+// but also to have more consistent transitions (with css).
+function removeTransition(button) {
+  button.classList.remove("pressed");
+}
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("transitionend", (event) => {
+    removeTransition(event.target)
+  });
+})
+
 
 // ripple effect
 function createRipple(event) {
