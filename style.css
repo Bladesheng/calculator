@@ -92,6 +92,8 @@ button {
   position: relative;
   overflow: hidden;
   transition: background 400ms;
+  /* remove blue highlighting on mobile */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .zero {
