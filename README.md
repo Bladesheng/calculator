@@ -1,7 +1,7 @@
 # calculator
 
-Very simple calculator. Functionality is similar to windows
-calculator. Desing is copied from iOS. Works on mobile too.
+Very simple calculator. Functionality is very similar to windows 10
+calculator. Desing is straight up copied from iOS. Can be controlled with keyboard and works great on mobile too.
 
 Check it out here: https://bladesheng.github.io/calculator/
 
