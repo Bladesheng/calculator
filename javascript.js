@@ -343,7 +343,7 @@ document.addEventListener("keydown", (event) => {
 
   if (pressedNumberBtn) {
     pressedNumberBtn.classList.add("pressed");
-    // using 32ms delay, roughly same as default windows keyboard delay
+    // using 32ms delay, same as default windows keyboard delay
     // to prevent getting stuck in pressed state
     setTimeout(() => {removeTransition(pressedNumberBtn)}, 32);
     numbersInput(pressedNumberBtn); 
